@@ -38,9 +38,9 @@ export const tasksSlice = createSlice({
             }
 
         },
-        addTaskAC(state, action: PayloadAction<{ task: TaskType }>) {
+        addTaskAC(state, action: PayloadAction< TaskType >) {
             //return {...state, [action.task.todoListId]: [action.task, ...state[action.task.todoListId]]}
-            state[action.payload.task.todoListId].unshift(action.payload.task)
+            state[action.payload.todoListId].unshift(action.payload)
         },
         updateTaskAC(state, action: PayloadAction<{ taskId: string, model: UpdateDomainTaskModelType, todolistId: string }>) {
             //           return {...state, [action.todolistId]: state[action.todolistId]
