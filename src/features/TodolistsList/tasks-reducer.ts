@@ -38,9 +38,9 @@ export const tasksSlice = createSlice({
             }
 
         },
-        addTaskAC(state, action: PayloadAction< TaskType >) {
+        addTaskAC(state, action: PayloadAction<{task:TaskType} >) {
             //return {...state, [action.task.todoListId]: [action.task, ...state[action.task.todoListId]]}
-            state[action.payload.todoListId].unshift(action.payload)
+            state[action.payload.task.todoListId].unshift(action.payload.task)
         },
         updateTaskAC(state, action: PayloadAction<{ taskId: string, model: UpdateDomainTaskModelType, todolistId: string }>) {
             //           return {...state, [action.todolistId]: state[action.todolistId]
@@ -132,7 +132,7 @@ export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
             dispatch(setAppStatusAC({status: 'succeeded'}))
         })
 }
-export const removeTaskTC = (taskId: string, todolistId: string) => (dispatch: Dispatch<ActionsType>) => {
+export const removeTaskTC = (taskId: string, todolistId: string) => (dispatch: Dispatch) => {
     todolistsAPI.deleteTask(todolistId, taskId)
         .then(res => {
             const action = removeTaskAC({taskId: taskId, todolistId: todolistId})
@@ -200,12 +200,12 @@ export type UpdateDomainTaskModelType = {
     deadline?: string
 }
 
-type ActionsType =
-    | ReturnType<typeof removeTaskAC>
-    | ReturnType<typeof addTaskAC>
-    | ReturnType<typeof updateTaskAC>
-    | AddTodolistActionType
-    | RemoveTodolistActionType
-    | SetTodolistsActionType
-    | ReturnType<typeof setTasksAC>
-type ThunkDispatch = Dispatch<ActionsType>
+// type ActionsType =
+//     | ReturnType<typeof removeTaskAC>
+//     | ReturnType<typeof addTaskAC>
+//     | ReturnType<typeof updateTaskAC>
+//     | AddTodolistActionType
+//     | RemoveTodolistActionType
+//     | SetTodolistsActionType
+//     | ReturnType<typeof setTasksAC>
+type ThunkDispatch = Dispatch
