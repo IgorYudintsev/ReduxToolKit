@@ -5,7 +5,6 @@ import thunkMiddleware from 'redux-thunk'
  import {appReducer} from './app-reducer'
 import {authReducer} from '../features/Login/auth-reducer'
 import {configureStore} from "@reduxjs/toolkit";
-import {useDispatch} from "react-redux";
 
 // объединяя reducer-ы с помощью combineReducers,
 // мы задаём структуру нашего единственного объекта-состояния
@@ -31,9 +30,8 @@ export type AppRootStateType = ReturnType< RootReducerType>
 // @ts-ignore
 window.store = store;
 
- type AppDispatchType=typeof store.dispatch
-// создаем кастомный хук чтобы Диспатчи были протипизированы по умолчанию
-export const useAppDispatch=()=>useDispatch<AppDispatchType>()
+
+
 
 
 
