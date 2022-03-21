@@ -1,7 +1,7 @@
 import {
     addTodolistAC, changeTodolistEntityStatusAC,
     changeTodolistFilterAC,
-    changeTodolistTitleAC, FilterValuesType,
+    changeTodolistTitleAC, fetchTodolistsTC, FilterValuesType,
     removeTodolistAC, setTodolistsAC, TodolistDomainType,
     todolistsReducer
 } from './todolists-reducer'
@@ -36,7 +36,8 @@ test('correct todolist should be added', () => {
         addedDate: '',
         order: 0
     }
-
+let payload={todolists:startState}
+const action=fetchTodolistsTC.fulfilled(payload,'request')
 
     const endState = todolistsReducer(startState, addTodolistAC({todolist:todolist}))
 
